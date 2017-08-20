@@ -5,7 +5,7 @@ var currentDir;
 var borders=60;
 var score=0;
 var hiscore_json;
-var hiscore;
+var hiscore=-1;
 var token;
 
 var foodColor=123;
@@ -13,15 +13,13 @@ var hue=10;
 var sat=25;
 var updateScore_json;
 
-
-
 function preload() {
 	var url="http://localhost:8080/SnakeScoreUpdate/webapi/score/getscore";
 	hiscore_json=httpGet(url, "json",false,function(response){
 		hiscore_json=response;
 	});
 }
-
+// 52.87.171.153
 function setup() {
 	createCanvas(600,600);
 	s=new Snake();
@@ -35,8 +33,12 @@ function setup() {
 
 function draw() {
 	if(!hiscore_json){
+		setTimeout(function(){    
+			document.getElementById("loader").style.center="-300px";
+		},100)
 		return;
-	}	
+	}
+	else document.getElementById("loader").style.display="none";
 	background(51);
 	textSize(30);
 	fill(250);
@@ -46,8 +48,9 @@ function draw() {
 	textAlign(LEFT);
 	text(score, 500,0,10, 30);
 	text("Hi-Score: ", 400,25,10, 30);
-	hiscore=hiscore_json["newScore"];
-	token=hiscore_json["token"];
+	if(hiscore===-1)
+		hiscore=hiscore_json["newScore"];
+	token=hiscore_json["token"];	
 	text(hiscore, 525 ,25,10, 30);
 	if(s.eat(food)){
 		food=pickLocation();

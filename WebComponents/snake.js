@@ -31,16 +31,22 @@ function Snake(){
 				this.length=0;
 				this.tail=[];
 				this.updateHighScore();
+				preload();
+				draw();
+				score=0;
 			}
 		}
 	}
 	
 	this.updateHighScore = function(){
-		if(hiscore<=score){
+		if(hiscore<score){
 			hiscore=score;
+		}else{
+			hiscore=-1;
+			return;
 		}
 		console.log(hiscore);
-		updateScore_json.newScore=hiscore;
+		updateScore_json.newScore=""+hiscore;
 		updateScore_json.token=token;
 		var url="http://localhost:8080/SnakeScoreUpdate/webapi/score/updatescore";
 		httpPost(url,"json",updateScore_json,false);
