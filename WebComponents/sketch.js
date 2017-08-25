@@ -12,9 +12,10 @@ var foodColor=123;
 var hue=10;
 var sat=25;
 var updateScore_json;
+var fRate=10;
 
 function preload() {
-	var url="http://localhost:8080/SnakeScoreUpdate/webapi/score/getscore";
+	var url="http://52.87.171.153:8080/SnakeScoreUpdate/webapi/score/getscore";
 	hiscore_json=httpGet(url, "json",false,function(response){
 		hiscore_json=response;
 	});

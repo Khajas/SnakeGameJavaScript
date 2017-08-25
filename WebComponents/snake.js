@@ -18,6 +18,7 @@ function Snake(){
 			this.length++;
 			score=this.length;
 			text(score, 500,0,10, 30);
+			frameRate(++fRate);
 			return true;
 		}
 		return false;
@@ -34,6 +35,8 @@ function Snake(){
 				preload();
 				draw();
 				score=0;
+				fRate=10;
+				frameRate(fRate);
 			}
 		}
 	}
@@ -48,7 +51,7 @@ function Snake(){
 		console.log(hiscore);
 		updateScore_json.newScore=""+hiscore;
 		updateScore_json.token=token;
-		var url="http://localhost:8080/SnakeScoreUpdate/webapi/score/updatescore";
+		var url="http://52.87.171.153:8080/SnakeScoreUpdate/webapi/score/updatescore";
 		httpPost(url,"json",updateScore_json,false);
 	}
 	
