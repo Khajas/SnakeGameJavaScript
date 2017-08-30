@@ -24,8 +24,8 @@ public class ScoreUpdateServiceImpl implements ScoreUpdateService{
 	
 	public ScoreUpdateServiceImpl(){
 		mongo = new MongoClient( "52.87.171.153" , 27017 );
-		MongoCredential.createCredential(DB,COLLECTION, 
-				USERNAME.toCharArray());
+		MongoCredential.createCredential(USERNAME,DATABASE, 
+				PASSWORD.toCharArray());
 		System.out.println("Connected to the database successfully");
 		//				Accessing the database
 		database = mongo.getDatabase("snake");
